@@ -1,7 +1,7 @@
 import * as types from "../constants/actionTypes";
 
 const initialState = {
-  notes: [],
+  notes: [{ noteText: "hello", id: 5 }],
   loading: false,
   currentLocation: "home"
 };
