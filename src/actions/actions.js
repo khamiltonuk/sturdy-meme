@@ -69,9 +69,9 @@ export function removeNote(payload) {
   };
 }
 
-export function changeNoteColour(payload) {
+export function updateNoteColour(payload) {
   return {
-    type: types.CHANGE_NOTE_COLOUR,
+    type: types.UPDATE_NOTE_COLOUR,
     payload
   };
 }
