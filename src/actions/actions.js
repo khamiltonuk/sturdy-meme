@@ -1,5 +1,6 @@
 import * as types from "../constants/actionTypes";
 
+//folder actions
 export function createFolder(payload) {
   return {
     type: types.CREATE_FOLDER,
