@@ -40,7 +40,7 @@ const ColourOffering = styled.li`
 const Posit = ({ note, setPostitColour, removeNote, setCount, count }) => {
   return (
     <Postit style={{ background: note.noteColour }}>
-      {note.noteText}
+      <input value={note.noteText} />
       <RemoveNote onClick={() => removeNote(note.id)}>Remove note</RemoveNote>
       <ToggleListButton onClick={() => setCount(!count)}>
         change color
