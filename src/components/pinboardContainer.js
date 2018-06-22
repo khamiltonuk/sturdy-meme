@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { createNote } from "../actions/actions";
+import { createNote, removeNote } from "../actions/actions";
 
 import Pinboard from "./Pinboard";
 
@@ -13,7 +13,8 @@ const PinboardContainer = connect(
   },
   function mapDispatchToProps(dispatch) {
     return {
-      createNote: note => dispatch(createNote(note))
+      createNote: note => dispatch(createNote(note)),
+      removeNote: id => dispatch(removeNote(id))
     };
   }
 )(Pinboard);
