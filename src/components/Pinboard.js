@@ -1,6 +1,13 @@
 import React from "react";
 import uuidv1 from "uuid/v1";
 import Postit from "./PostitContainer";
+import styled from "styled-components";
+
+const Postits = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
 
 const Pinboard = props => {
   const newNote = function(noteId) {
@@ -19,12 +26,12 @@ const Pinboard = props => {
       <button onClick={() => props.createNote(newNote(uuidv1()))}>
         Create new note
       </button>
-      <ul>
+      <Postits>
         {props.notes &&
           props.notes.map(note => {
-            return <Postit note={note} />;
+            return <Postit key={note.id} note={note} />;
           })}
-      </ul>
+      </Postits>
     </div>
   );
 };
