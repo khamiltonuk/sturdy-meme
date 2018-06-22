@@ -1,5 +1,5 @@
 import reducer from "./reducer";
-import { createNote, removeNote } from "../actions/actions";
+import { createNote, removeNote, changeNoteColour } from "../actions/actions";
 
 describe("Reducer", () => {
   it("should add a note to state when createNote is dispatched", () => {
@@ -9,12 +9,23 @@ describe("Reducer", () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
-  it.only("should remove note from state when RemoveNote is dispatched", () => {
+  it("should remove note from state when RemoveNote is dispatched", () => {
     const initialState = {
       notes: [{ noteText: "hello", id: 2 }, { noteText: "hello", id: 3 }]
     };
     const action = removeNote(2);
     const expectedState = { notes: [{ noteText: "hello", id: 3 }] };
+    expect(reducer(initialState, action)).toEqual(expectedState);
+  });
+
+  it("should update a notes colour", () => {
+    const initialState = {
+      notes: [{ noteColour: "yellow", id: 2 }, { noteColour: "yellow", id: 3 }]
+    };
+    const action = changeNoteColour({ id: 2, noteColour: "pink" });
+    const expectedState = {
+      notes: [{ noteColour: "pink", id: 2 }, { noteColour: "yellow", id: 3 }]
+    };
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 });
