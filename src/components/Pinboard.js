@@ -1,5 +1,6 @@
 import React from "react";
 import uuidv1 from "uuid/v1";
+import Postit from "./PostitContainer";
 
 const Pinboard = props => {
   const newNote = function(noteId) {
@@ -21,14 +22,7 @@ const Pinboard = props => {
       <ul>
         {props.notes &&
           props.notes.map(note => {
-            return (
-              <li key={note.id}>
-                {note.noteText}
-                <button onClick={() => props.removeNote(note.id)}>
-                  Remove note
-                </button>
-              </li>
-            );
+            return <Postit note={note} />;
           })}
       </ul>
     </div>
