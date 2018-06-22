@@ -13,6 +13,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         notes: [...state.notes, action.payload]
       };
+    case types.REMOVE_NOTE:
+      return {
+        ...state,
+        notes: [...state.notes.filter(note => note.id !== action.payload)]
+      };
     default:
       return state;
   }
