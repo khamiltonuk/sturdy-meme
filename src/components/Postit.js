@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { compose, withState, withHandlers } from "recompose";
+import Button from "@material-ui/core/Button";
+import Delete from "@material-ui/icons/Delete";
+import ColorLens from "@material-ui/icons/ColorLens";
 
-const RemoveNote = styled.button`
-    border:0,
-    padding: 10px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+const StyledButton = styled(Button)`
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
 `;
 
 const Postit = styled.li`
@@ -16,11 +17,11 @@ const Postit = styled.li`
   width: 300px;
   margin: 0 auto;
   transform: rotate(2deg);
-  padding: 40px;
+  padding: 40px 0 0 40px;
   box-shadow: 0 10px 10px 2px rgba(0, 0, 0, 0.3);
 `;
-const ToggleListButton = styled.button`
-  position: absolute;
+const ToggleListButton = styled(Button)`
+  position: absolute !important;
   bottom: 10px;
   left: 10px;
 `;
@@ -28,18 +29,35 @@ const ToggleListButton = styled.button`
 const ColourPicker = styled.ul`
   list-style: none;
   padding: 0;
-  margin: li;
+  margin: 0;
+  z-index: 12;
 `;
 const ColourOffering = styled.li`
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 56px;
+  width: 56px;
   background: blue;
+  position: absolute;
+  text-indent: 100%;
+  overflow: hidden;
 `;
-const Input = styled.input`
+const ColourOfferingYellow = ColourOffering.extend`
+  background: yellow;
+  left: 0;
+`;
+const ColourOfferingGreen = ColourOffering.extend`
+  background: green;
+  left: 30px;
+`;
+const ColourOfferingPink = ColourOffering.extend`
+  background: pink;
+  left: 60px;
+`;
+const Textarea = styled.textarea`
   border: none;
   background: none;
   padding: 20px;
+  width: 100%;
   &:focus {
     outline: 0;
   }
@@ -62,27 +80,42 @@ const Posit = ({
         border: isPostitActive ? "1px solid red" : "0"
       }}
     >
-      <Input
-        value={note.noteText}
+      <Textarea
         onChange={handleInputChange}
+        autoFocus
         onFocus={() => highLightPostit(!isPostitActive)}
         onBlur={() => highLightPostit(!isPostitActive)}
+        defaultValue={note.noteText}
       />
-      <RemoveNote onClick={() => removeNote(note.id)}>Remove note</RemoveNote>
-      <ToggleListButton onClick={() => toggleColourPicker(!isColorPickerShown)}>
-        change color
+      <StyledButton
+        onClick={() => removeNote(note.id)}
+        variant="fab"
+        color="primary"
+        aria-label="Remove note"
+        title="Remove note"
+      >
+        <Delete />
+      </StyledButton>
+      <ToggleListButton
+        onClick={() => toggleColourPicker(!isColorPickerShown)}
+        title="change color"
+        color="primary"
+        aria-label="change color"
+        variant="fab"
+      >
+        <ColorLens />
       </ToggleListButton>
       {isColorPickerShown && (
         <ColourPicker>
-          <ColourOffering onClick={() => setPostitColour("yellow")}>
+          <ColourOfferingYellow onClick={() => setPostitColour("yellow")}>
             yellow
-          </ColourOffering>
-          <ColourOffering onClick={() => setPostitColour("green")}>
+          </ColourOfferingYellow>
+          <ColourOfferingGreen onClick={() => setPostitColour("green")}>
             green
-          </ColourOffering>
-          <ColourOffering onClick={() => setPostitColour("pink")}>
+          </ColourOfferingGreen>
+          <ColourOfferingPink onClick={() => setPostitColour("pink")}>
             pink
-          </ColourOffering>
+          </ColourOfferingPink>
         </ColourPicker>
       )}
     </Postit>

@@ -2,6 +2,8 @@ import React from "react";
 import uuidv1 from "uuid/v1";
 import Postit from "./PostitContainer";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
 
 const Postits = styled.ul`
   list-style: none;
@@ -23,9 +25,16 @@ const Pinboard = props => {
   return (
     <div>
       <h1>Pinboard</h1>
-      <button onClick={() => props.createNote(newNote(uuidv1()))}>
-        Create new note
-      </button>
+
+      <Button
+        onClick={() => props.createNote(newNote(uuidv1()))}
+        variant="fab"
+        color="primary"
+        aria-label="Create new note"
+        title="Create new note"
+      >
+        <AddIcon />
+      </Button>
       <Postits>
         {props.notes &&
           props.notes.map(note => {
