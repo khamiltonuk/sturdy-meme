@@ -36,16 +36,43 @@ const ColourOffering = styled.li`
   width: 40px;
   background: blue;
 `;
+const Input = styled.input`
+  border: none;
+  background: none;
+  padding: 20px;
+  &:focus {
+    outline: 0;
+  }
+`;
 
-const Posit = ({ note, setPostitColour, removeNote, setCount, count }) => {
+const Posit = ({
+  note,
+  setPostitColour,
+  removeNote,
+  toggleColourPicker,
+  isColorPickerShown,
+  isPostitActive,
+  handleInputChange,
+  highLightPostit
+}) => {
   return (
-    <Postit style={{ background: note.noteColour }}>
-      <input value={note.noteText} />
+    <Postit
+      style={{
+        background: note.noteColour,
+        border: isPostitActive ? "1px solid red" : "0"
+      }}
+    >
+      <Input
+        value={note.noteText}
+        onChange={handleInputChange}
+        onFocus={() => highLightPostit(!isPostitActive)}
+        onBlur={() => highLightPostit(!isPostitActive)}
+      />
       <RemoveNote onClick={() => removeNote(note.id)}>Remove note</RemoveNote>
-      <ToggleListButton onClick={() => setCount(!count)}>
+      <ToggleListButton onClick={() => toggleColourPicker(!isColorPickerShown)}>
         change color
       </ToggleListButton>
-      {count && (
+      {isColorPickerShown && (
         <ColourPicker>
           <ColourOffering onClick={() => setPostitColour("yellow")}>
             yellow
@@ -62,12 +89,17 @@ const Posit = ({ note, setPostitColour, removeNote, setCount, count }) => {
   );
 };
 const enhance = compose(
-  withState("count", "setCount", false),
+  withState("isColorPickerShown", "toggleColourPicker", false),
+  withState("isPostitActive", "highLightPostit", false),
   withHandlers({
     setPostitColour: props => colour => {
       props.updateNoteColour({ id: props.note.id, noteColour: colour });
-      props.setCount();
-    }
+      props.toggleColourPicker();
+    },
+    handleInputChange: props => event => {
+      props.updateNoteText({ id: props.note.id, noteText: event.value });
+    },
+    highLightPostIt: props => event => {}
   })
 );
 

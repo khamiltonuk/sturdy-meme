@@ -12,7 +12,7 @@ const Postits = styled.ul`
 const Pinboard = props => {
   const newNote = function(noteId) {
     return {
-      noteText: "",
+      noteText: "Another new note",
       noteColour: "yellow",
       id: noteId,
       x: 100,
