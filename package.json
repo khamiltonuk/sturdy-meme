@@ -5,8 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "recompose": "0.27.1",
